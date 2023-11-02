@@ -1,0 +1,35 @@
+
+spring:
+  # ???
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/qiniu
+    username: root
+    password: 1234
+    # swagger
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jackson:
+    date-format: yy-MM-dd HH:mm
+    time-zone: GMT+8
+
+  mail:
+    default-encoding: UTF-8
+    host: smtp.163.com
+    port: 587
+    username: 15213928814@163.com
+    password: PJDIZCTQPDXCTVBS
+    from: 15213928814@163.com
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+  redis:
+    client-type: lettuce
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+    # configuration:
+  # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
