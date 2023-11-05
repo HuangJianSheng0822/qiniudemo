@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qn.qiniudemoapi.mapper.CommentMapper">
+
+
+    <select id="getRootComment" resultMap="rootCommentMap">
+        SELECT
+            COMMENT.id AS id,
+            COMMENT.content AS content,
+            COMMENT.user_id AS userId,
+            COMMENT.video_id AS videoId,
+            COMMENT.like_count as likeCount,
+            u.head_img AS headImg,
+            u.NAME AS userName,
+            COMMENT.created AS created,
+            (SELECT COUNT(*) FROM COMMENT AS c WHERE c.root_id = COMMENT.id) AS childCommentCount
+
+        FROM
+            COMMENT
+                LEFT JOIN USER u ON u.id = COMMENT.user_id -- 使用LEFT JOIN进行左连接
+        WHERE
+            COMMENT.root_id IS NULL
+          AND to_id IS NULL
+          and video_id=#{id}
+        order by comment.created asc
+        limit #{page},#{size};
+
+    </select>
+    <select id="getRootChildComment" resultType="com.qn.qiniudemoapi.vo.ChildComment">
+        select
+            comment.id as id,
+            comment.content as content,
+            comment.user_id as userId,
+            u.head_img as headImg,
+            u.name as userName,
+            comment.like_count as likeCount,
+            comment.to_id as toUserId,
+            comment.to_name as toUserName,
+            comment.created as created,
+        comment.like_count as likeCount
+        from comment
+                 left join user u
+                           on u.id = comment.user_id
+        where comment.root_id = #{rootId}
+        order by comment.created asc
+        limit 0,3;
+
+    </select>
+
+    <resultMap id="rootCommentMap" type="com.qn.qiniudemoapi.vo.RootComment">
+        <result property="id" column="id"/>
+        <collection property="childComments" javaType="ArrayList" ofType="com.qn.qiniudemoapi.vo.ChildComment"
+                    select="getRootChildComment" column="id">
+        </collection>
+    </resultMap>
+    <select id="getChildComment" resultType="com.qn.qiniudemoapi.vo.ChildComment">
+        select
+            comment.id as id,
+            comment.content as content,
+            comment.user_id as userId,
+            u.head_img as headImg,
+            u.name as userName,
+            comment.like_count as likeCount,
+            comment.to_id as toUserId,
+            comment.to_name as toUserName,
+            comment.created as created
+        from comment
+                 left join user u
+                           on u.id = comment.user_id
+        where comment.root_id = #{rootId}
+        order by comment.created asc
+        limit #{page},#{size}
+    </select>
+
+</mapper>

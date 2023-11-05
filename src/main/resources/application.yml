@@ -39,3 +39,14 @@ jwt:
   time: 360000000
   # 签名
   signature: admin
+
+# 分页视频列表配置
+video-page:
+  expiration-time-minutes: 5
+  key-prefix: videoPage
+
+# 视频播放次数
+video-play-count:
+  ## 天数
+  expiration-time-minutes: 7
+  key-prefix: videoPlayCount

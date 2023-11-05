@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qn.qiniudemoapi.mapper.CollectVideoMapper">
+
+
+    <select id="getCollectVideo" resultType="com.qn.qiniudemoapi.vo.CollectVideoVo">
+        SELECT
+            cv.id as id,
+            cv.collect_id as collectId,
+            cv.video_id as videoId,
+            cv.created as created,
+            cv.play_count as playCount,
+            v.title as title,
+            v.cover_url as coverUrl,
+            v.user_id as userId
+        FROM collect_video cv
+                 LEFT JOIN video v
+                           on cv.video_id=v.id
+        where
+            cv.collect_id =#{collectId}
+        ORDER BY cv.created desc
+        limit #{page},#{size}
+    </select>
+</mapper>

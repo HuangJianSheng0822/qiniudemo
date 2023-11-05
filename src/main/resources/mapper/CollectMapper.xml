@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qn.qiniudemoapi.mapper.CollectMapper">
+
+    <select id="getCollectList" resultType="com.qn.qiniudemoapi.vo.CollectVo">
+        select id,name,cover,`desc`,created
+        from collect
+        where user_id=#{userId}
+        limit 0,15
+    </select>
+</mapper>

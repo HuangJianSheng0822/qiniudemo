@@ -12,8 +12,8 @@ public class UploadController {
 
     @GetMapping("/up/token")
     String getAuth(){
-        String accessKey = "NpzEEIGAfBdwV3Pk-";
-        String secretKey = "LU2rebbpMS8hSlLF-";
+        String accessKey = "NpzEEIGAfBdwV3Pk-tvLOg7cQxXVxLcfZ9VaLGJS";
+        String secretKey = "LU2rebbpMS8hSlLF-u_SS03qh4E6AXgKO4pDIdK4";
         String bucket = "1024hjsdemo";
         Random random = new Random();
         String key = null;

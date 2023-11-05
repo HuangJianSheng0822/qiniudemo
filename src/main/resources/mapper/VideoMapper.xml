@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qn.qiniudemoapi.mapper.VideoMapper">
+
+    <select id="getVideoCoverList" resultType="com.qn.qiniudemoapi.vo.CoverVo" parameterType="map">
+        SELECT
+            video.id AS id,
+            u.id AS userId,
+            u.NAME AS userName,
+            u.head_img AS headImg,
+            u.DESC AS userDasc,
+            video.title AS title,
+            video.cover_url AS coverUrl,
+            video.created AS created
+        FROM
+            video
+                left join user u
+                          on video.user_id=u.id
+        ORDER BY
+            created DESC
+        limit #{map.page},#{map.limit}
+    </select>
+    <select id="getVideoId" resultType="java.lang.String">
+        select video_id from video where id=#{id}
+    </select>
+
+    <select id="getVideoInfo" resultType="com.qn.qiniudemoapi.vo.VideoInfoVo">
+        SELECT v.id,v.title, t.name AS type, v.tags, v.description, v.created, v.playback,v.video_id as playUrl
+        FROM video v
+                 LEFT JOIN type t ON v.type_id = t.id
+        WHERE v.id =#{id}
+    </select>
+</mapper>
