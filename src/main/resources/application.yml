@@ -50,3 +50,21 @@ video-play-count:
   ## 天数
   expiration-time-minutes: 7
   key-prefix: videoPlayCount
+# 直播
+live:
+  people-list-key-prefix: peopleList
+  people-count-key: peopleLiveCount
+  # 默认24小时
+  live-barrage-key-prefix: liveBarrage
+  live-barrage-counk-key: liveBarrageCount
+  expiration-time-minutes: 24
+logging:
+  pattern:
+    dateformat: yy-MM-dd HH:mm
+  file:
+    path: F:\\logging\\
+  level:
+    root: info
+  logback:
+    rollingpolicy:
+      max-file-size: 10240KB

@@ -61,7 +61,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     public ResponseDataStructure getVideoCoverList(int page, int limit) {
 
         HashMap<String, Object> map = new HashMap<>();
-        map.put("page", page);
+        map.put("page", page*limit);
         map.put("limit", limit);
         List<CoverVo> mappderList = videoMapper.getVideoCoverList(map);
         return new ResponseDataStructure(200, "", mappderList);

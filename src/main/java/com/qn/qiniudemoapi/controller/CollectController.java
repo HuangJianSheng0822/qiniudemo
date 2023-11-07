@@ -16,7 +16,6 @@ public class CollectController {
 
     private final CollectService collectService;
 
-
     @Autowired
     public CollectController(CollectService collectService) {
         this.collectService = collectService;

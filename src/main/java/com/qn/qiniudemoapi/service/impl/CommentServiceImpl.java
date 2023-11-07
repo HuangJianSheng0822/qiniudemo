@@ -42,7 +42,6 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     public ResponseDataStructure addComment(String token,AddCommentDto addCommentDto) {
         String userId = JwtUtil.decrypt(token);
         Comment comment = new Comment();
-        System.out.println(addCommentDto.getContent());
         comment.setContent(addCommentDto.getContent());
         comment.setUserId(userId);
         comment.setVideoId(addCommentDto.getVideoId());
